@@ -1,0 +1,28 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $message = $_POST["message"];
+
+    // Alıcı e-posta adresi
+    $to = "alici@ornek.com";
+
+    // E-posta başlığı
+    $subject = "Yeni İletişim Formu Mesajı";
+
+    // Gönderenin e-posta adresi
+    $headers = "From: $email\r\nReply-To: $email";
+
+    // E-posta içeriği
+    $mail_body = "Name: $name\nEmail: $email\nMessage: $message";
+
+    // Mail gönderme işlemi
+    $mail_sent = mail($to, $subject, $mail_body, $headers);
+
+    if ($mail_sent) {
+        echo "Mesajınız başarıyla gönderildi. Teşekkür ederiz!";
+    } else {
+        echo "Mail gönderme işlemi başarısız oldu. Lütfen daha sonra tekrar deneyin.";
+    }
+}
+?>
